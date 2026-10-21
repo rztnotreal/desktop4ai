@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-config",
+  "mcpServers": {
+    "desktop4ai": {
+      "command": "node",
+      "args": ["c:/Users/user/Desktop/desktop4ai/src/server/mcp.js"]
+    }
+  }
+}

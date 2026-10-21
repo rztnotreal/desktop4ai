@@ -1,0 +1,36 @@
+{
+  "name": "desktop4ai",
+  "version": "1.0.0",
+  "description": "The Next-Generation Sub-Token Computer-Use Protocol & Desktop Automation Engine for AI Agents",
+  "main": "src/core/engine.js",
+  "bin": {
+    "desktop4ai": "src/cli/cli.js",
+    "omni-desktop": "src/cli/cli.js"
+  },
+  "scripts": {
+    "start": "node src/server/mcp.js",
+    "mcp": "node src/server/mcp.js",
+    "inspect": "node src/cli/cli.js inspect",
+    "windows": "node src/cli/cli.js windows",
+    "build:native": "powershell -Command \"& 'C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe' /nologo /optimize+ /target:exe /out:bin\\desktop-core.exe /lib:'C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\WPF' /r:System.Drawing.dll,System.Windows.Forms.dll,UIAutomationClient.dll,UIAutomationTypes.dll,WindowsBase.dll src\\native\\desktop-core.cs\""
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "computer-use",
+    "gui-agent",
+    "desktop-automation",
+    "claude-code",
+    "antigravity",
+    "opencode",
+    "codex",
+    "cursor",
+    "accessibility",
+    "set-of-marks"
+  ],
+  "author": "OmniDesktop Open Source Community",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.1"
+  }
+}

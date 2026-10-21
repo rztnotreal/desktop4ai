@@ -1,0 +1,7 @@
+node_modules/
+*.log
+*.tmp
+screenshot*.png
+test-*.png
+som_*.png
+bin/*.pdb
