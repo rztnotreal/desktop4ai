@@ -1,5 +1,5 @@
 /**
- * OmniDesktop (desktop4ai) - Core Engine
+ * desktop4ai - Core Engine
  * High-performance bridge between AI models and OS GUI.
  */
 

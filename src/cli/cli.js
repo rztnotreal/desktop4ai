@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * OmniDesktop (desktop4ai) - Command Line Interface
+ * desktop4ai - Command Line Interface
  */
 
 const { DesktopEngine } = require("../core/engine");
@@ -31,9 +31,9 @@ async function main() {
       case "tree": {
         const compact = await engine.getCompactContext();
         console.log("\n=======================================================");
-        console.log(`🖥️  Active Window : ${compact.activeWindow}`);
-        console.log(`📍 Cursor Pos    : ${compact.cursorPosition}`);
-        console.log(`🎯 Elements      : ${compact.elementsCount} actionable controls`);
+        console.log(`Active Window : ${compact.activeWindow}`);
+        console.log(`Cursor Pos    : ${compact.cursorPosition}`);
+        console.log(`Elements      : ${compact.elementsCount} actionable controls`);
         console.log("=======================================================\n");
         for (const el of compact.elements) {
           console.log(`  ${el}`);
@@ -59,7 +59,7 @@ async function main() {
           process.exit(1);
         }
         const res = await engine.focusWindow(target);
-        console.log(res?.success ? `✅ Focused "${target}"` : `❌ Could not find window "${target}"`);
+        console.log(res?.success ? `[OK] Focused "${target}"` : `[ERROR] Could not find window "${target}"`);
         break;
       }
 
@@ -78,14 +78,14 @@ async function main() {
           // Click by element ID
           const id = parseInt(args[1], 10);
           const res = await engine.clickElement(id);
-          console.log(`✅ Clicked element #${id} at (${res.x}, ${res.y})`);
+          console.log(`[OK] Clicked element #${id} at (${res.x}, ${res.y})`);
         } else {
           // Click by coordinates
           const x = parseInt(args[1], 10);
           const y = parseInt(args[2], 10);
           const btn = args[3] || "left";
           const res = await engine.clickCoordinate(x, y, btn);
-          console.log(`✅ Clicked at (${res.x}, ${res.y}) with ${btn}`);
+          console.log(`[OK] Clicked at (${res.x}, ${res.y}) with ${btn}`);
         }
         break;
       }
@@ -97,7 +97,7 @@ async function main() {
           process.exit(1);
         }
         await engine.type(text);
-        console.log(`✅ Typed ${text.length} characters.`);
+        console.log(`[OK] Typed ${text.length} characters.`);
         break;
       }
 
@@ -108,14 +108,14 @@ async function main() {
           process.exit(1);
         }
         await engine.hotkey(combo);
-        console.log(`✅ Sent hotkey: ${combo}`);
+        console.log(`[OK] Sent hotkey: ${combo}`);
         break;
       }
 
       case "scroll": {
         const amount = parseInt(args[1] || "-300", 10);
         await engine.scroll(amount);
-        console.log(`✅ Scrolled: ${amount}`);
+        console.log(`[OK] Scrolled: ${amount}`);
         break;
       }
 
@@ -123,9 +123,9 @@ async function main() {
         const outPath = args[1] && !args[1].startsWith("--") ? args[1] : `screenshot_${Date.now()}.png`;
         const som = args.includes("--som");
         const res = await engine.capture({ outPath, som });
-        console.log(`✅ Captured screenshot to ${res.path} (${res.width}x${res.height})`);
+        console.log(`[OK] Captured screenshot to ${res.path} (${res.width}x${res.height})`);
         if (som) {
-          console.log(`🏷️  Set-of-Marks annotated elements: ${res.somElements}`);
+          console.log(`Set-of-Marks annotated elements: ${res.somElements}`);
         }
         break;
       }
@@ -136,14 +136,14 @@ async function main() {
         process.exit(1);
     }
   } catch (err) {
-    console.error(`❌ Error: ${err.message}`);
+    console.error(`[ERROR] Error: ${err.message}`);
     process.exit(1);
   }
 }
 
 function printHelp() {
   console.log(`
-OmniDesktop (desktop4ai) - Universal Sub-Token Computer Use Engine
+desktop4ai - Universal Sub-Token Computer Use Engine
 
 Usage:
   desktop4ai <command> [options]

@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ OmniDesktop (`desktop4ai`)
+# ⚡ desktop4ai
 ### The Universal, Sub-Token Computer-Use Protocol for All AI Agents
 
 [![GitHub Stars](https://img.shields.io/badge/Stars-10M%20Ready-gold.svg?style=for-the-badge&logo=github)](https://github.com)
@@ -14,7 +14,7 @@
   Compatible with <b>Antigravity</b>, <b>OpenCode</b>, <b>Claude Code</b>, <b>Codex</b>, <b>Cursor</b>, <b>Windsurf</b>, and custom agents.
 </p>
 
-[Quickstart](#-quickstart) • [Why OmniDesktop?](#-why-omnidesktop) • [Sub-Token Architecture](#-the-sub-token-revolution) • [MCP Configuration](#-universal-mcp-integration) • [Python SDK](#-python-sdk) • [Documentation](docs/)
+[Quickstart](#-quickstart) • [Why desktop4ai?](#-why-desktop4ai) • [Sub-Token Architecture](#-the-sub-token-revolution) • [MCP Configuration](#-universal-mcp-integration) • [Python SDK](#-python-sdk) • [Documentation](docs/)
 
 ---
 
@@ -31,17 +31,21 @@ Every current Computer-Use framework (Anthropic Computer Use, OpenAI Operator, U
 
 ---
 
-## 🚀 The OmniDesktop Revolution
+## 🚀 The desktop4ai Revolution
 
-**OmniDesktop changes everything.** Instead of mindlessly blasting full-screen images into LLMs, OmniDesktop utilizes a **Tiered Perception Engine**:
+**desktop4ai changes everything.** Instead of mindlessly blasting full-screen images into LLMs, desktop4ai utilizes a **Tiered Perception Engine**:
 
 ```mermaid
 flowchart TD
-    A["Active Application (Chrome, Telegram, Excel, Blender...)"] --> B["OmniDesktop Native Engine (<10ms)"]
+    A["Active Application (Chrome, Telegram, Excel, Blender...)"] --> B["desktop4ai Native Engine (<10ms)"]
     
-    B --> C1["Tier 1: Semantic UI Tree (A11y/UIA)\n👉 ~150-300 Tokens | 100% Click Accuracy | Zero Misclicks"]
-    B --> C2["Tier 2: Set-of-Marks (SoM) Badges\n👉 High-contrast [1], [2], [3] visual tags for canvas & games"]
-    B --> C3["Tier 3: Dynamic Window Crop\n👉 Crops only active window / changed delta (70% pixel savings)"]
+    C1["Tier 1: Semantic UI Tree (A11y/UIA)\n👉 ~150-300 Tokens | 100% Click Accuracy | Zero Misclicks"]
+    C2["Tier 2: Set-of-Marks (SoM) Badges\n👉 High-contrast [1], [2], [3] visual tags for canvas & games"]
+    C3["Tier 3: Dynamic Window Crop\n👉 Crops only active window / changed delta (70% pixel savings)"]
+
+    B --> C1
+    B --> C2
+    B --> C3
 
     C1 --> D["Universal Protocol (MCP / CLI / Python SDK)"]
     C2 --> D
@@ -52,7 +56,7 @@ flowchart TD
 
 ### 🏆 Benchmark Comparison
 
-| Feature | Standard Computer-Use | **OmniDesktop (`desktop4ai`)** | Advantage |
+| Feature | Standard Computer-Use | **desktop4ai** | Advantage |
 |---|---|---|---|
 | **Tokens per Step** | ~1,850 tokens | **~180 tokens** | **90% Token Reduction** ⚡ |
 | **Tokens for 20 Steps** | ~37,000 tokens | **~3,600 tokens** | **10x Cheaper** 💰 |
@@ -199,7 +203,7 @@ desktop4ai/
 │   ├── agent_demo.py          # Complete autonomous agent in Python
 │   ├── test_run.js            # Automated integration test suite
 │   ├── claude_code_config.json# Ready config for Claude Code
-│   └── antigravity_config.json# Ready config for Antigravity & OpenCode
+│   └── antigravity_and_cursor_config.json # Ready config for Antigravity, OpenCode & Cursor
 ├── docs/
 │   ├── ARCHITECTURE.md        # System architecture & deep dive
 │   ├── BENCHMARKS.md          # Quantitative token savings & accuracy analysis
@@ -211,7 +215,7 @@ desktop4ai/
 
 ## 🤝 Contributing & Community
 
-OmniDesktop is an open protocol designed to empower the next billion AI agents. Pull requests, issues, and feature proposals are warmly welcomed!
+desktop4ai is an open protocol designed to empower the next billion AI agents. Pull requests, issues, and feature proposals are warmly welcomed!
 
 * ⭐ **Star this repository** if you believe AI agents deserve fast, affordable, and accurate computer-use.
 * 📜 Licensed under the **Apache-2.0 License**.

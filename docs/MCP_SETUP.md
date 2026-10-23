@@ -1,6 +1,6 @@
-# 🔌 Universal MCP Setup Guide
+# Universal MCP Setup Guide
 
-OmniDesktop communicates over the official **Model Context Protocol (MCP)** via standard `stdio`. This allows any modern AI assistant or agentic IDE to instantly acquire computer-use capabilities.
+desktop4ai communicates over the official **Model Context Protocol (MCP)** via standard `stdio`. This allows any modern AI assistant or agentic IDE to instantly acquire computer-use capabilities.
 
 ---
 
@@ -35,7 +35,7 @@ Or via npx once published:
 
 ## 2. Claude Code
 
-Register OmniDesktop directly with Claude Code using the CLI:
+Register desktop4ai directly with Claude Code using the CLI:
 
 ```bash
 claude mcp add desktop4ai node c:/Users/user/Desktop/desktop4ai/src/server/mcp.js
@@ -79,7 +79,7 @@ In Cursor or Windsurf settings (`cursor_settings.json`):
 
 ## 4. Standalone CLI & Terminal Use
 
-You can also run OmniDesktop standalone as a regular command-line tool:
+You can also run desktop4ai standalone as a regular command-line tool:
 
 ```bash
 # Inspect the active window and print clickable elements

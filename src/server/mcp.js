@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * OmniDesktop (desktop4ai) - Universal Model Context Protocol (MCP) Server
+ * desktop4ai - Universal Model Context Protocol (MCP) Server
  * Compatible with Antigravity, OpenCode, Claude Code, Codex, Cursor, Windsurf, Zed.
  */
 
@@ -19,7 +19,7 @@ const engine = new DesktopEngine();
 
 const server = new Server(
   {
-    name: "omni-desktop",
+    name: "desktop4ai",
     version: "1.0.0",
   },
   {
@@ -220,16 +220,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         }
 
         const formattedText = [
-          `🖥️ Active Window: ${compact.activeWindow}`,
-          `📍 Mouse Cursor: ${compact.cursorPosition}`,
-          `🎯 Interactive Elements Count: ${compact.elementsCount}`,
+          `Active Window: ${compact.activeWindow}`,
+          `Mouse Cursor: ${compact.cursorPosition}`,
+          `Interactive Elements Count: ${compact.elementsCount}`,
           "",
           "--- Actionable UI Elements (Call click_element with ID) ---",
           ...compact.elements.slice(0, args?.limit || 50),
         ];
 
         if (screenshotInfo) {
-          formattedText.push("", `📸 Screenshot saved at: ${screenshotInfo.savedPath} (${screenshotInfo.resolution})`);
+          formattedText.push("", `Screenshot saved at: ${screenshotInfo.savedPath} (${screenshotInfo.resolution})`);
         }
 
         return {
@@ -248,7 +248,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Clicked element #${args.id} at (${res.x}, ${res.y}) with ${args.button || "left"} click.`,
+              text: `[OK] Clicked element #${args.id} at (${res.x}, ${res.y}) with ${args.button || "left"} click.`,
             },
           ],
         };
@@ -260,7 +260,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Clicked coordinates (${res.x}, ${res.y}) with ${args.button || "left"} click.`,
+              text: `[OK] Clicked coordinates (${res.x}, ${res.y}) with ${args.button || "left"} click.`,
             },
           ],
         };
@@ -272,7 +272,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Moved cursor to (${res.x}, ${res.y}).`,
+              text: `[OK] Moved cursor to (${res.x}, ${res.y}).`,
             },
           ],
         };
@@ -284,7 +284,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Successfully typed text (${args.text.length} characters).`,
+              text: `[OK] Successfully typed text (${args.text.length} characters).`,
             },
           ],
         };
@@ -296,7 +296,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Pressed hotkey '${args.combo}'.`,
+              text: `[OK] Pressed hotkey '${args.combo}'.`,
             },
           ],
         };
@@ -309,7 +309,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Scrolled ${direction} (amount: ${args.amount}).`,
+              text: `[OK] Scrolled ${direction} (amount: ${args.amount}).`,
             },
           ],
         };
@@ -321,7 +321,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Dragged from (${args.from_x}, ${args.from_y}) to (${args.to_x}, ${args.to_y}).`,
+              text: `[OK] Dragged from (${args.from_x}, ${args.from_y}) to (${args.to_x}, ${args.to_y}).`,
             },
           ],
         };
@@ -334,8 +334,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             {
               type: "text",
               text: res?.success
-                ? `✅ Brought window '${args.target}' to foreground.`
-                : `⚠️ Window matching '${args.target}' was not found. Call list_windows to see active windows.`,
+                ? `[OK] Brought window '${args.target}' to foreground.`
+                : `[WARN] Window matching '${args.target}' was not found. Call list_windows to see active windows.`,
             },
           ],
         };
@@ -363,7 +363,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           content: [
             {
               type: "text",
-              text: `✅ Screenshot captured: ${res.path} (${res.width}x${res.height}). Annotated elements: ${res.somElements || 0}`,
+              text: `[OK] Screenshot captured: ${res.path} (${res.width}x${res.height}). Annotated elements: ${res.somElements || 0}`,
             },
           ],
         };
@@ -377,7 +377,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       content: [
         {
           type: "text",
-          text: `❌ Error executing ${name}: ${error.message}`,
+          text: `[ERROR] Error executing ${name}: ${error.message}`,
         },
       ],
       isError: true,
@@ -389,10 +389,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("[OmniDesktop] MCP Server running on stdio.");
+  console.error("[desktop4ai] MCP Server running on stdio.");
 }
 
 main().catch((err) => {
-  console.error("[OmniDesktop] Fatal startup error:", err);
+  console.error("[desktop4ai] Fatal startup error:", err);
   process.exit(1);
 });

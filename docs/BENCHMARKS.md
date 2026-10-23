@@ -1,12 +1,12 @@
 # 📊 Token Economics & Performance Benchmarks
 
-A quantitative comparison of **OmniDesktop (`desktop4ai`)** vs. Standard Vision-Only Computer-Use frameworks (Anthropic Computer Use, OS-World baseline).
+A quantitative comparison of **desktop4ai** vs. Standard Vision-Only Computer-Use frameworks (Anthropic Computer Use, OS-World baseline).
 
 ---
 
 ## 1. 20-Step Desktop Workflow Comparison
 
-| Metric | Anthropic Computer-Use (Standard) | OmniDesktop (Sub-Token Mode) | Improvement |
+| Metric | Anthropic Computer-Use (Standard) | desktop4ai (Sub-Token Mode) | Improvement |
 |---|---|---|---|
 | **Tokens per Step** | 1,850 tokens (1024x768 PNG) | **180 tokens** (Semantic UI Tree) | **90.3% Token Reduction** 🚀 |
 | **Tokens per 20-Step Task** | ~37,000 tokens | **~3,600 tokens** | **10x Cost Savings** 💰 |
@@ -22,9 +22,9 @@ A quantitative comparison of **OmniDesktop (`desktop4ai`)** vs. Standard Vision-
 ```
 Standard Full Screenshot (1920x1080) : ■■■■■■■■■■■■■■■■■■■■ 2,400 tokens
 Standard Downscaled (1024x768)       : ■■■■■■■■■■■■■■ 1,750 tokens
-OmniDesktop Tier 3 (RoI Window Crop) : ■■■■■■ 650 tokens
-OmniDesktop Tier 2 (Set-of-Marks)    : ■■■■■ 520 tokens
-OmniDesktop Tier 1 (Semantic A11y)   : ■■ 180 tokens  <-- 90% SAVINGS!
+desktop4ai Tier 3 (RoI Window Crop)  : ■■■■■■ 650 tokens
+desktop4ai Tier 2 (Set-of-Marks)     : ■■■■■ 520 tokens
+desktop4ai Tier 1 (Semantic A11y)    : ■■ 180 tokens  <-- 90% SAVINGS!
 ```
 
 ---
@@ -33,7 +33,7 @@ OmniDesktop Tier 1 (Semantic A11y)   : ■■ 180 tokens  <-- 90% SAVINGS!
 
 In standard computer-use systems, pure text models like **DeepSeek-V3**, **Llama 3**, **Qwen-2.5-Coder**, or **Claude 3.5 Sonnet (text mode)** cannot operate because they cannot perceive raw images.
 
-With OmniDesktop:
+With desktop4ai:
 1. The engine transforms the active window into structured JSON/YAML with numbered IDs.
 2. The text model receives a structured list: `[#4] Button "Submit" -> center: (450, 720)`.
 3. The model outputs a simple tool call: `click_element(id=4)`.

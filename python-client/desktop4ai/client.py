@@ -1,5 +1,5 @@
 """
-Python Client for OmniDesktop (desktop4ai) Native Engine.
+Python Client for desktop4ai Native Engine.
 """
 
 import os

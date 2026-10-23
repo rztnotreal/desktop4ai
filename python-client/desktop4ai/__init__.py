@@ -1,5 +1,5 @@
 """
-OmniDesktop (desktop4ai) - Universal Python SDK for Autonomous GUI Agents.
+desktop4ai - Universal Python SDK for Autonomous GUI Agents.
 Sub-token, high-accuracy desktop control protocol.
 """
 

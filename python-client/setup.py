@@ -6,7 +6,7 @@ setup(
     description="The Universal Sub-Token Computer-Use Protocol & Engine for AI Agents",
     long_description=open("README.md", encoding="utf-8").read() if os.path.exists("README.md") else "",
     long_description_content_type="text/markdown",
-    author="OmniDesktop Open Source Community",
+    author="desktop4ai Open Source Community",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

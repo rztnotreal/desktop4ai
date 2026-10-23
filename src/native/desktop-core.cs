@@ -114,8 +114,59 @@ namespace Desktop4AI
         private const uint MOUSEEVENTF_MIDDLEUP = 0x0040;
         private const uint MOUSEEVENTF_WHEEL = 0x0800;
 
-        private const uint KEYEVENTF_EXTENDEDKEY = 0x0001;
+        [StructLayout(LayoutKind.Sequential)]
+        public struct INPUT
+        {
+            public uint type;
+            public KEYBDINPUT ki;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct KEYBDINPUT
+        {
+            public ushort wVk;
+            public ushort wScan;
+            public uint dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+            public uint padding1;
+            public uint padding2;
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
+
+        private const uint INPUT_KEYBOARD = 1;
         private const uint KEYEVENTF_KEYUP = 0x0002;
+        private const uint KEYEVENTF_UNICODE = 0x0004;
+
+        public static void MoveCursorHardware(int x, int y)
+        {
+            int sw = GetSystemMetrics(0);
+            int sh = GetSystemMetrics(1);
+            SetCursorPos(x, y);
+            uint absX = (uint)((x * 65535) / Math.Max(1, sw));
+            uint absY = (uint)((y * 65535) / Math.Max(1, sh));
+            mouse_event(0x0001 | 0x8000, absX, absY, 0, UIntPtr.Zero);
+        }
+
+        public static void SmoothMoveTo(int targetX, int targetY, int durationMs = 250)
+        {
+            POINT start;
+            GetCursorPos(out start);
+            int steps = Math.Max(10, durationMs / 12);
+            for (int i = 1; i <= steps; i++)
+            {
+                double t = (double)i / steps;
+                // Ease-out cubic curve for natural human motion
+                double factor = 1.0 - Math.Pow(1.0 - t, 3);
+                int curX = (int)(start.X + (targetX - start.X) * factor);
+                int curY = (int)(start.Y + (targetY - start.Y) * factor);
+                MoveCursorHardware(curX, curY);
+                Thread.Sleep(12);
+            }
+            MoveCursorHardware(targetX, targetY);
+        }
 
         public class ElementNode
         {
@@ -608,35 +659,35 @@ namespace Desktop4AI
 
             RunOnInputDesktop(delegate()
             {
-                SetCursorPos(x, y);
-                Thread.Sleep(25);
+                SmoothMoveTo(x, y, 200);
+                Thread.Sleep(40);
 
                 if (btn == "right")
                 {
                     mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, UIntPtr.Zero);
-                    Thread.Sleep(20);
+                    Thread.Sleep(25);
                     mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, UIntPtr.Zero);
                 }
                 else if (btn == "middle")
                 {
                     mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, UIntPtr.Zero);
-                    Thread.Sleep(20);
+                    Thread.Sleep(25);
                     mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, UIntPtr.Zero);
                 }
                 else if (btn == "double")
                 {
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);
-                    Thread.Sleep(20);
+                    Thread.Sleep(25);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, UIntPtr.Zero);
-                    Thread.Sleep(70);
+                    Thread.Sleep(80);
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);
-                    Thread.Sleep(20);
+                    Thread.Sleep(25);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, UIntPtr.Zero);
                 }
                 else
                 {
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);
-                    Thread.Sleep(20);
+                    Thread.Sleep(25);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, UIntPtr.Zero);
                 }
             });
@@ -656,24 +707,11 @@ namespace Desktop4AI
             {
                 if (!smooth)
                 {
-                    SetCursorPos(targetX, targetY);
+                    MoveCursorHardware(targetX, targetY);
                 }
                 else
                 {
-                    POINT start;
-                    GetCursorPos(out start);
-                    int steps = 15;
-                    for (int i = 1; i <= steps; i++)
-                    {
-                        double t = (double)i / steps;
-                        // Smooth ease-out cubic
-                        double factor = 1.0 - Math.Pow(1.0 - t, 3);
-                        int curX = (int)(start.X + (targetX - start.X) * factor);
-                        int curY = (int)(start.Y + (targetY - start.Y) * factor);
-                        SetCursorPos(curX, curY);
-                        Thread.Sleep(8);
-                    }
-                    SetCursorPos(targetX, targetY);
+                    SmoothMoveTo(targetX, targetY, 300);
                 }
             });
 
@@ -691,7 +729,7 @@ namespace Desktop4AI
 
             RunOnInputDesktop(delegate()
             {
-                SetCursorPos(x1, y1);
+                SmoothMoveTo(x1, y1, 150);
                 Thread.Sleep(30);
                 mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);
                 Thread.Sleep(50);
@@ -702,10 +740,10 @@ namespace Desktop4AI
                     double t = (double)i / steps;
                     int curX = (int)(x1 + (x2 - x1) * t);
                     int curY = (int)(y1 + (y2 - y1) * t);
-                    SetCursorPos(curX, curY);
-                    Thread.Sleep(10);
+                    MoveCursorHardware(curX, curY);
+                    Thread.Sleep(12);
                 }
-                SetCursorPos(x2, y2);
+                MoveCursorHardware(x2, y2);
                 Thread.Sleep(50);
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, UIntPtr.Zero);
             });
@@ -725,7 +763,7 @@ namespace Desktop4AI
                 {
                     int x = int.Parse(args[2]);
                     int y = int.Parse(args[3]);
-                    SetCursorPos(x, y);
+                    MoveCursorHardware(x, y);
                     Thread.Sleep(15);
                 }
                 mouse_event(MOUSEEVENTF_WHEEL, 0, 0, (uint)amount, UIntPtr.Zero);
@@ -742,35 +780,23 @@ namespace Desktop4AI
 
             RunOnInputDesktop(delegate()
             {
-                // If text is longer than 6 characters, paste via clipboard for instant speed & perfect unicode
-                if (text.Length > 6)
+                // Send Unicode characters directly via SendInput
+                int inputSize = Marshal.SizeOf(typeof(INPUT));
+                foreach (char c in text)
                 {
-                    string oldText = null;
-                    try { if (Clipboard.ContainsText()) oldText = Clipboard.GetText(); } catch { }
+                    INPUT[] inputs = new INPUT[2];
+                    inputs[0].type = INPUT_KEYBOARD;
+                    inputs[0].ki.wVk = 0;
+                    inputs[0].ki.wScan = (ushort)c;
+                    inputs[0].ki.dwFlags = KEYEVENTF_UNICODE;
 
-                    try
-                    {
-                        Clipboard.SetText(text);
-                        Thread.Sleep(30);
-                        // Send Ctrl+V
-                        keybd_event(0x11, 0, 0, UIntPtr.Zero); // VK_CONTROL
-                        keybd_event(0x56, 0, 0, UIntPtr.Zero); // 'V'
-                        Thread.Sleep(20);
-                        keybd_event(0x56, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
-                        keybd_event(0x11, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
-                        Thread.Sleep(50);
-                    }
-                    finally
-                    {
-                        if (!string.IsNullOrEmpty(oldText))
-                        {
-                            try { Clipboard.SetText(oldText); } catch { }
-                        }
-                    }
-                }
-                else
-                {
-                    SendKeys.SendWait(text);
+                    inputs[1].type = INPUT_KEYBOARD;
+                    inputs[1].ki.wVk = 0;
+                    inputs[1].ki.wScan = (ushort)c;
+                    inputs[1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+
+                    SendInput(2, inputs, inputSize);
+                    Thread.Sleep(25);
                 }
             });
 

@@ -1,5 +1,5 @@
 /**
- * OmniDesktop (desktop4ai) - Safety & Guardrails Engine
+ * desktop4ai - Safety & Guardrails Engine
  * Prevents unintended clicks, enforces process sandboxing, and handles emergency aborts.
  */
 

@@ -4,8 +4,7 @@
   "description": "The Next-Generation Sub-Token Computer-Use Protocol & Desktop Automation Engine for AI Agents",
   "main": "src/core/engine.js",
   "bin": {
-    "desktop4ai": "src/cli/cli.js",
-    "omni-desktop": "src/cli/cli.js"
+    "desktop4ai": "src/cli/cli.js"
   },
   "scripts": {
     "start": "node src/server/mcp.js",
@@ -28,7 +27,7 @@
     "accessibility",
     "set-of-marks"
   ],
-  "author": "OmniDesktop Open Source Community",
+  "author": "desktop4ai Open Source Community",
   "license": "Apache-2.0",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.1"

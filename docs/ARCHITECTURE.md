@@ -1,6 +1,6 @@
-# 🏛️ OmniDesktop Architecture & Deep Dive
+# desktop4ai Architecture & Deep Dive
 
-OmniDesktop (`desktop4ai`) is designed from first principles to solve the fundamental bottlenecks of Computer-Use AI agents: **Massive Token Waste**, **Pixel Hallucinations**, and **Ecosystem Fragmentation**.
+desktop4ai is designed from first principles to solve the fundamental bottlenecks of Computer-Use AI agents: **Massive Token Waste**, **Pixel Hallucinations**, and **Ecosystem Fragmentation**.
 
 ---
 
@@ -24,13 +24,13 @@ flowchart LR
 
 ---
 
-## 2. The OmniDesktop Solution: Sub-Token Tiered Perception
+## 2. The desktop4ai Solution: Sub-Token Tiered Perception
 
-OmniDesktop introduces a **3-tier hybrid perception engine**:
+desktop4ai introduces a **3-tier hybrid perception engine**:
 
 ```mermaid
 flowchart TD
-    OS["Operating System GUI"] --> Core["OmniDesktop Native Engine"]
+    OS["Operating System GUI"] --> Core["desktop4ai Native Engine"]
     
     subgraph Perception ["Tiered Perception"]
         Core --> Tier1["Tier 1: Semantic UI Tree (A11y/UIA)\n• ~150-300 Tokens\n• Zero coordinate guessing\n• Works with ANY text LLM"]
@@ -58,7 +58,7 @@ flowchart TD
 
 ## 3. High-Performance Native Core (`desktop-core.exe`)
 
-OmniDesktop features a compiled, zero-dependency C# native binary (`bin/desktop-core.exe`) that executes in under **10 milliseconds**:
+desktop4ai features a compiled, zero-dependency C# native binary (`bin/desktop-core.exe`) that executes in under **10 milliseconds**:
 
 1. **DPI Awareness**: Calls `SetProcessDPIAware()` so coordinates correspond exactly to physical monitor pixels across 100%, 125%, 150%, and 200% Windows scaling.
 2. **Clean Win32 Native Threading**: Uses `kernel32!CreateThread` + `user32!OpenInputDesktop` to seamlessly switch desktop stations, enabling flawless automation even in headless sessions, background runners, or sandboxed environments.
@@ -70,7 +70,7 @@ OmniDesktop features a compiled, zero-dependency C# native binary (`bin/desktop-
 
 ## 4. Universal Interoperability (MCP Native)
 
-OmniDesktop is a native **Model Context Protocol (MCP)** server. Any MCP client can plug it in with zero modifications:
+desktop4ai is a native **Model Context Protocol (MCP)** server. Any MCP client can plug it in with zero modifications:
 
 * **Antigravity**: Add to MCP tools or configuration.
 * **OpenCode**: Drop into `mcpServers`.

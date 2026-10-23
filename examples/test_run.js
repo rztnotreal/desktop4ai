@@ -1,11 +1,11 @@
 /**
- * Automated test runner for OmniDesktop engine
+ * Automated test runner for desktop4ai engine
  */
 
 const { DesktopEngine } = require("../src/core/engine");
 
 async function runTests() {
-  console.log("🚀 Starting OmniDesktop Core Engine Integration Tests...\n");
+  console.log("Starting desktop4ai Core Engine Integration Tests...\n");
   const engine = new DesktopEngine();
 
   // Test 1: Cursor
@@ -29,7 +29,7 @@ async function runTests() {
   const blockRes = engine.safety.validateHotkey("ctrl+alt+del");
   console.log(`[PASS] Safety Guardrails: 'ctrl+s' safe=${safeRes.safe}, 'ctrl+del' safe=${blockRes.safe}`);
 
-  console.log("\n🎉 ALL 5 TEST SUITES PASSED! System is 100% operational.");
+  console.log("\nALL 5 TEST SUITES PASSED! System is 100% operational.");
 }
 
 runTests().catch((err) => {
