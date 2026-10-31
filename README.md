@@ -3,7 +3,7 @@
 # ⚡ desktop4ai
 ### The Universal, Sub-Token Computer-Use Protocol for All AI Agents
 
-[![GitHub Stars](https://img.shields.io/badge/Stars-10M%20Ready-gold.svg?style=for-the-badge&logo=github)](https://github.com)
+[![GitHub Stars](https://img.shields.io/badge/Stars-100k%20Ready-gold.svg?style=for-the-badge&logo=github)](https://github.com)
 [![Protocol](https://img.shields.io/badge/Protocol-MCP%20Standard-blue.svg?style=for-the-badge)](https://modelcontextprotocol.io)
 [![Token Savings](https://img.shields.io/badge/Token%20Savings-90%25-brightgreen.svg?style=for-the-badge)](docs/BENCHMARKS.md)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Cross--Platform-purple.svg?style=for-the-badge)](docs/ARCHITECTURE.md)
